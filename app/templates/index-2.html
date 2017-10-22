@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+{% block title %}Flask - Index{% endblock %}
+
+
+{% block page_content %}
+
+
+<br>
+<div class="post-tabs">
+  <ul class="nav nav-tabs">
+    <li{% if not show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_all')}}">All</a></li>
+    {% if current_user.is_authenticated %}
+    <li{% if show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_followed') }}">Followers</a></li>
+    {% endif %}
+  </ul>
+  {% include '_posts.html' %}
+</div>
+
+{% if pagination %}
+<div class="pagination">
+  {{ macros.pagination_widget(pagination, '.index') }}
+</div>
+
+{% endif %}
+<div class="page-header">
+<br>
+  <p>The local date and time is {{ moment(current_time).format('LLL') }}.</p>
+  <p>That was {{ moment(current_time).fromNow(refresh=True) }} </p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap-transition.js"></script>
+    <script src="../static/js/bootstrap-alert.js"></script>
+    <script src="../static/js/bootstrap-modal.js"></script>
+    <script src="../static/js/bootstrap-dropdown.js"></script>
+    <script src="../static/js/bootstrap-scrollspy.js"></script>
+    <script src="../static/js/bootstrap-tab.js"></script>
+    <script src="../static/js/bootstrap-tooltip.js"></script>
+    <script src="../static/js/bootstrap-popover.js"></script>
+    <script src="../static/js/bootstrap-button.js"></script>
+    <script src="../static/js/bootstrap-collapse.js"></script>
+    <script src="../static/js/bootstrap-carousel.js"></script>
+    <script src="../static/js/bootstrap-typeahead.js"></script>
+    <script>
+      !function ($) {
+        $(function(){
+          // carousel demo
+          $('#myCarousel').carousel()
+        })
+      }(window.jQuery)
+    </script>
+    <script src="../static/js/holder.js"></script>
+{% endblock %}

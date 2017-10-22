@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/2.3.2/examples/carousel.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Carousel Template · Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="../static/bootstrap.css" rel="stylesheet">
+    <link href="../static/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../static/styles2.css" rel="stylesheet">
+    <style>
+
+    /* GLOBAL STYLES
+    -------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
+
+    body {
+     padding-bottom: 100px; 
+     background-color: #ffffff;
+     background-image: url('{{ url_for('static',filename='xiaxue.jpg') }}');
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+     background-size:100% 100%;
+     color:#444;
+    }
+
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://getbootstrap.com/2.3.2/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://getbootstrap.com/2.3.2/assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://getbootstrap.com/2.3.2/assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="http://getbootstrap.com/2.3.2/assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="http://getbootstrap.com/2.3.2/assets/ico/favicon.png">
+  <style id="holderjs-style" type="text/css">.holderjs-fluid {font-size:16px;font-weight:bold;text-align:center;font-family:sans-serif;margin:0}</style></head>
+
+  <body>
+
+
+
+    <!-- NAVBAR
+    ================================================== -->
+    <div class="navbar-wrapper">
+      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+      <div class="container">
+
+        <div class="navbar navbar-inverse">
+          <div class="navbar-inner">
+            <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Flasky</a>
+            <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/first">First</a></li>
+                <li><a href="{{ url_for('main.publish_blog') }}">Publish Blog</a></li>
+              </ul>
+                <!-- Read about Bootstrap dropdowns at http://twbs.github.com/bootstrap/javascript.html#dropdowns -->
+                <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{ current_user.gravatar(size=20) }}"> <span class="glyphicon glyphicon-user"></span>{{ current_user.username }} <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Action</a></li>
+                    <li><a href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Another action</a></li>
+                    <li><a href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">Nav header</li>
+                    <li><a href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Separated link</a></li>
+                    <li><a href="http://getbootstrap.com/2.3.2/examples/carousel.html#">One more separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!-- /.navbar-inner -->
+        </div><!-- /.navbar -->
+
+      </div> <!-- /.container -->
+    </div><!-- /.navbar-wrapper -->
+
+
+
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="../static/picture/slide-01.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Example headline.</h1>
+              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <a class="btn btn-large btn-primary" href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Sign up today</a>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="../static/picture/slide-02.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Another example headline.</h1>
+              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <a class="btn btn-large btn-primary" href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Learn more</a>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img src="../static/picture/slide-03.jpg" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>One more for good measure.</h1>
+              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <a class="btn btn-large btn-primary" href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Browse gallery</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="http://getbootstrap.com/2.3.2/examples/carousel.html#myCarousel" data-slide="prev">‹</a>
+      <a class="right carousel-control" href="http://getbootstrap.com/2.3.2/examples/carousel.html#myCarousel" data-slide="next">›</a>
+    </div><!-- /.carousel -->
+
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="span4">
+          <img class="img-circle" data-src="holder.js/140x140" alt="140x140" style="width: 140px; height: 140px;" src="data:image/png;base64,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">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+          <p><a class="btn" href="http://getbootstrap.com/2.3.2/examples/carousel.html#">View details »</a></p>
+        </div><!-- /.span4 -->
+        <div class="span4">
+          <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="data:image/png;base64,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" style="width: 140px; height: 140px;">
+          <h2>Heading</h2>
+          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn" href="http://getbootstrap.com/2.3.2/examples/carousel.html#">View details »</a></p>
+        </div><!-- /.span4 -->
+        <div class="span4">
+          <img class="img-circle" data-src="holder.js/140x140" alt="140x140" src="data:image/png;base64,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" style="width: 140px; height: 140px;">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn" href="http://getbootstrap.com/2.3.2/examples/carousel.html#">View details »</a></p>
+        </div><!-- /.span4 -->
+      </div><!-- /.row -->
+
+
+      <!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="featurette">
+        <img class="featurette-image pull-right" src="../static/picture/browser-icon-chrome.png">
+        <h2 class="featurette-heading">First featurette headling. <span class="muted">It'll blow your mind.</span></h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="featurette">
+        <img class="featurette-image pull-left" src="../static/picture/browser-icon-firefox.png">
+        <h2 class="featurette-heading">Oh yeah, it's that good. <span class="muted">See for yourself.</span></h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="featurette">
+        <img class="featurette-image pull-right" src="../static/picture/browser-icon-safari.png">
+        <h2 class="featurette-heading">And lastly, this one. <span class="muted">Checkmate.</span></h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Back to top</a></p>
+        <p>© 2013 Company, Inc. · <a href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Privacy</a> · <a href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Terms</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap-transition.js"></script>
+    <script src="../static/js/bootstrap-alert.js"></script>
+    <script src="../static/js/bootstrap-modal.js"></script>
+    <script src="../static/js/bootstrap-dropdown.js"></script>
+    <script src="../static/js/bootstrap-scrollspy.js"></script>
+    <script src="../static/js/bootstrap-tab.js"></script>
+    <script src="../static/js/bootstrap-tooltip.js"></script>
+    <script src="../static/js/bootstrap-popover.js"></script>
+    <script src="../static/js/bootstrap-button.js"></script>
+    <script src="../static/js/bootstrap-collapse.js"></script>
+    <script src="../static/js/bootstrap-carousel.js"></script>
+    <script src="../static/js/bootstrap-typeahead.js"></script>
+    <script>
+      !function ($) {
+        $(function(){
+          // carousel demo
+          $('#myCarousel').carousel()
+        })
+      }(window.jQuery)
+    </script>
+    <script src="../static/js/holder.js"></script>
+  
+
+</body></html>
