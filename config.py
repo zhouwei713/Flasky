@@ -19,6 +19,7 @@ class Config:
     FLASKY_FOLLOWERS_PER_PAGE = 5
     FLASKY_COMMENTS_PER_PAGE = 5
     MAX_SEARCH_RESULTS = 50
+    ONLINE_LAST_MINUTES = 5
     
     @staticmethod
     def init_app(app):
