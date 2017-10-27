@@ -35,7 +35,8 @@ def get_user_last_activity(user_id):
 
 def get_online_users():
     current = int(time.time()) // 60
-    minutes = xrange(cfg.ONLINE_LAST_MINUTES)
+    #minutes = xrange(cfg.ONLINE_LAST_MINUTES)
+    minutes = xrange(current_app.config['ONLINE_LAST_MINUTES'])
     return rc.sunion(['online-users/%d' % (current - x) for x in minutes])
 
 
