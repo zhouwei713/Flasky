@@ -6,6 +6,7 @@ Created on 2017415
 
 #from datetime import datetime
 from flask import render_template, session, redirect, url_for, current_app,flash, abort,request, make_response, g
+from flask import Response
 from .. import db
 from ..models import User, Role, Permission, Post, Comment
 from ..email import send_email
@@ -20,6 +21,8 @@ from jinja2.compiler import UndeclaredNameVisitor
 from app.main.forms import EditProfileAdminForm
 from PIL import Image
 import os
+from ..useredis import mark_online, get_online_users, get_user_last_activity
+from ..api.queryIP import queryip
 
 
 @main.route('/',methods=['GET','POST'])
@@ -81,7 +84,7 @@ def changepw():
             return redirect(url_for('main.profile'))
         else:
             flash('Enter invalid password')
-    return render_template('/changepw.html',form=form)
+    return render_template('changepw.html',form=form)
 
 @main.route('/admin')
 @login_required
@@ -137,6 +140,27 @@ def edit_profile_admin(id):
 def manage_user():
     users = User.query.all()
     return render_template('manage_user.html', users=users)
+
+@main.before_app_request
+def mark_current_user_online():
+    mark_online(request.remote_addr)
+
+@main.route('/admin/online-user')
+@login_required
+@admin_required
+def online_user():
+    Online_user = get_online_users()
+    for i in Online_user:
+        location = queryip(i)
+        city = location.get('city','kenya')
+        return render_template('online_user.html', Online_user=Online_user, city=city)
+    #location = queryip()
+    #Online_user = ','.join(get_online_users())
+    #a = type(Online_user)
+    #raise Exception('test')
+    #return render_template('online_user.html', Online_user=Online_user, city=city)
+    #return Response('Online User: %s' % ','.join(get_online_users()), mimetype='text/plain')
+
 
 @main.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
@@ -289,6 +313,16 @@ def moderate_disable(id):
 @main.route('/first')
 def first():
     return render_template('first.html')
+
+# @main.route('/api/query-ip', methods=['GET', 'POST'])
+# def query_ip():
+#     form = SearchForm()
+#     if form.validate_on_submit():
+#         ip = form.search.data
+#         return redirect('http://maps.google.com/?q=%s' % ip)
+#     return render_template('api/query_ip.html',form=form)
+
+
 
     
     

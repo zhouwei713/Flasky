@@ -19,6 +19,7 @@ class Config:
     FLASKY_FOLLOWERS_PER_PAGE = 5
     FLASKY_COMMENTS_PER_PAGE = 5
     MAX_SEARCH_RESULTS = 50
+    ONLINE_LAST_MINUTES = 5
     
     @staticmethod
     def init_app(app):
@@ -46,3 +47,21 @@ config = {
     'production': ProductionConfig,
     'default': DevelopmentConfig
     }
+
+class ChatConfig(Config):
+    SECRET_KEY = 'i have a dream'
+    SESSION_COOKIE_HTTPONLY = False
+    CHAT_NAME = u'Talking about the Sky and Earth'
+    ONLINE_USER_CHANNEL = 'online_user_channel'
+    ROOM_ONLINE_USER_CHANNEL = 'room_online_user_channel_{room}'
+    ROOM_CHANNEL = 'room_channel_{room}'
+    ROOM_INCR_KEY = 'room_incr_key'
+    ROOM_CONTENT_INCR_KEY = 'room_content_incr_key'
+    ROOM_INFO_KEY = 'room_info_key_{room}'
+    ONLINE_USER_SIGNAL = ONLINE_USER_CHANNEL
+    ROOM_ONLINE_USER_SIGNAL = ROOM_ONLINE_USER_CHANNEL
+    ROOM_SIGNAL = ROOM_CHANNEL
+    CONN_CHANNEL_SET = 'conn_channel_set_{channel}'
+    COMET_TIMEOUT = 30
+    COMET_POLL_TIME = 2
+    CHANNEL_PLACEHOLDER = 'jwdlh'
