@@ -11,7 +11,8 @@
 {% endblock %}
 
 {% block navbar %}
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<!--<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">-->
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -25,10 +26,14 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li><a href="/">Home</a></li>
-        <li><a href="/first">First</a></li>
+        <li><a href="/first">Change Style</a></li>
         {% if current_user.is_authenticated %}
         <li><a href="{{ url_for('main.publish_blog') }}">Publish Blog</a></li>
         {% endif %}
+        <li><a href="{{ url_for('api.query_ip') }}">Query IP</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
@@ -43,7 +48,7 @@
         <li><a href="{{ url_for('main.user', username=current_user.username) }}">Profile</a></li>
         {% if current_user.is_administrator() %}
         <li><a href="{{ url_for('main.manage_user') }}">Manage User</a></li>
-            <li><a href="{{ url_for('main.online_user') }}">Online User</a></li>
+        <li><a href="{{ url_for('main.online_user') }}">Online User</a></li>
         {% endif %}
         <li><a href="{{ url_for('main.profile') }}">Setting</a></li>
         {% if current_user.can(Permission.MODERATE_COMMENTS) %}
@@ -74,9 +79,11 @@ body {
      background-attachment: fixed;
      background-size:100% 100%;
      color:#444;
+     min-height:100%;
+     margin:0;
 }
 </style>
-<div class="container">
+<div class="container" style="padding-bottom:100px;">
   {% for message in get_flashed_messages() %}
   <div class="alert alert-warning">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -87,8 +94,8 @@ body {
 </div>
 <div>
       <footer>
-        <p class="pull-right"><a href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Back to top</a></p>
-        <p>© 2017 zhouluobo Company, Inc. · <a href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Privacy</a> · <a href="https://github.com/zhouwei713#">GitHub</a></p>
+        <p style="padding: 2rem;" class="pull-right"><a href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Back to top</a></p>
+        <p style="padding: 2rem;">© 2017 zhouluobo Company, Inc. · <a href="https://github.com/zhouwei713#">Privacy</a> · <a href="https://github.com/zhouwei713#">GitHub</a></p>
       </footer>
 </div>
 {% endblock %}

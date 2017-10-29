@@ -2055,6 +2055,10 @@ table {
           border-radius: 4px;
 }
 
+.table-striped tbody tr:nth-of-type(odd){
+  background-color:rgba(0,0,0,.05)
+}
+
 .table-bordered th,
 .table-bordered td {
   border-left: 1px solid #dddddd;

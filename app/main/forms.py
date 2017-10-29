@@ -62,7 +62,8 @@ class CommentForm(Form):
     submit = SubmitField('Submit')
     
 class SearchForm(Form):
-    search = StringField('search', validators=[DataRequired()])
+    search = StringField('Search for IP', validators=[DataRequired()])
+    submit = SubmitField('Search')
     
     
     
