@@ -1,11 +1,13 @@
 {% extends 'bootstrap/base.html' %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% block title %}Flasky{%endblock %}
+{% block title %}Kung Fu World{%endblock %}
 
 {% block head %}
 {{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico')}}" tyep="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico')}}" type="image/x-icon">
+<!--<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico')}}" tyep="image/x-icon">-->
+<!--<link rel="icon" href="{{ url_for('static', filename='favicon.ico')}}" type="image/x-icon">-->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='background-dragonv2.jpg')}}" tyep="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='background-dragonv2.jpg')}}" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 
 {% endblock %}
@@ -21,7 +23,7 @@
         <span class="icon-bar">2</span>
         <span class="icon-bar">3</span>
       </button>
-      <a class="navbar-brand" href="/">Flasky</a>
+      <a class="navbar-brand" href="/">Kung Fu World</a>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -74,7 +76,7 @@
 body {
      padding-bottom: 100px; 
      background-color: #ffffff;
-     background-image: url('{{ url_for('static',filename='xifu.jpg') }}');
+     background-image: url('{{ url_for('static',filename='background-dragonv2.jpg') }}');
      background-repeat: no-repeat;
      background-attachment: fixed;
      background-size:100% 100%;

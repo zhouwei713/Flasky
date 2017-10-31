@@ -15,8 +15,8 @@ def queryip(ip):
     r = json.loads(content)
     # a = type(content)
     # b = type(r)
-    # print  r, r['city']
+    #print  r, r['city']
     return r
 
 # if __name__=='__main__':
-#     queryip('197.248.9.23')
+#     queryip('103.235.46.39')

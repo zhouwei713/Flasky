@@ -31,11 +31,17 @@ def ip_detail(ip):
     city = ip['city']
     continentCode = ip['continentCode']
     location = query_lat_long(countryName,countryCode)
-    lat = location['locations'][0]['latitude']
-    lon = location['locations'][0]['longitude']
-    return render_template('api/ip_detail.html', countryName=countryName,
+    if len(location['locations']) != 0:
+        lat = location['locations'][0]['latitude']
+        lon = location['locations'][0]['longitude']
+        return render_template('api/ip_detail.html', countryName=countryName,
                            countryCode=countryCode, stateProv=stateProv,
                            continentName=continentName, ipAddress=ipAddress,
                            city=city, continentCode=continentCode,
                            lat=lat, lon=lon)
+    return render_template('api/ip_detail.html', countryName=countryName,
+                               countryCode=countryCode, stateProv=stateProv,
+                               continentName=continentName, ipAddress=ipAddress,
+                               city=city, continentCode=continentCode,
+                           lat=0,lon=0)
     #return render_template('api/ip_detail.html',ip=ip)
