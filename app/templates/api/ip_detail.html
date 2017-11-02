@@ -16,13 +16,13 @@
                 <td>{{ countryCode }}</td>
             </tr>
             <tr>
-                <th>stateProv</th>
-                <td>{{ stateProv }}</td>
+                <th>region</th>
+                <td>{{ region }}</td>
             </tr>
-            <tr>
-                <th>continentName</th>
-                <td>{{ continentName }}</td>
-            </tr>
+{#            <tr>#}
+{#                <th>continentName</th>#}
+{#                <td>{{ continentName }}</td>#}
+{#            </tr>#}
             <tr>
                 <th>city</th>
                 <td><a href="https://www.google.com/maps?q={{ city }}" >{{ city }}</a></td>
@@ -34,6 +34,14 @@
             <tr>
                 <th>Coordinates</th>
                 <td>{{ lat }},{{ lon }}</td>
+            </tr>
+             <tr>
+                <th>IP Is Available Or Not</th>
+                <td>{{ ip_is_available }}</td>
+            </tr>
+             <tr>
+                <th>Your IP</th>
+                <td>{{ YIP }}</td>
             </tr>
             </tbody>
         </table>
