@@ -23,11 +23,16 @@ from PIL import Image
 import os
 from ..useredis import mark_online, get_online_users, get_user_last_activity
 from ..api.queryIP import queryip
+from ..api.check_mobile import checkMobile
+
 
 
 @main.route('/',methods=['GET','POST'])
 def index():
     form = PostForm()
+    # MB = False
+    # if checkMobile(request):
+    #     MB = True
     if form.validate_on_submit() and current_user.can(Permission.WRITE_ARTICLES):
         post = Post(body=form.body.data, postname=form.postname.data, author=current_user._get_current_object())
         db.session.add(post)
@@ -43,7 +48,7 @@ def index():
     pagination = query.order_by(Post.timestamp.desc()).paginate(page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'], error_out=False)
     posts = pagination.items
     return render_template('index.html', form=form, posts=posts,show_followed=show_followed,
-                           pagination=pagination,current_time=datetime.utcnow())
+                           pagination=pagination,current_time=datetime.utcnow(),)
 
 @main.route('/post/publish', methods=['GET', 'POST'])
 def publish_blog():
@@ -141,19 +146,19 @@ def manage_user():
     users = User.query.all()
     return render_template('manage_user.html', users=users)
 
-@main.before_app_request
-def mark_current_user_online():
-    mark_online(request.remote_addr)
-
-@main.route('/admin/online-user')
-@login_required
-@admin_required
-def online_user():
-    Online_user = get_online_users()
-    for i in Online_user:
-        location = queryip(i)
-        city = location.get('city','kenya')
-        return render_template('online_user.html', Online_user=Online_user, city=city)
+# @main.before_app_request
+# def mark_current_user_online():
+#     mark_online(request.remote_addr)
+#
+# @main.route('/admin/online-user')
+# @login_required
+# @admin_required
+# def online_user():
+#     Online_user = get_online_users()
+#     for i in Online_user:
+#         location = queryip(i)
+#         city = location.get('city','kenya')
+#         #return render_template('online_user.html', Online_user=Online_user, city=city)
     #location = queryip()
     #Online_user = ','.join(get_online_users())
     #a = type(Online_user)

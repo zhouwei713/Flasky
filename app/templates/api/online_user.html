@@ -9,7 +9,7 @@ Flask-OnlineUser
 <div class="page-header" style="color: #000;">
     <h1>Online Users:</h1>
     {% for i in Online_user %}
-        <li style="color: #f0f0f0;"><a href="http://maps.google.com/?q={{ city }}" >{{ i }}</a></li>
+        <li style="color: #f0f0f0;"><a href="{{ url_for('api.ip_detail', ip=i) }}" >{{ i }}</a></li>
     {% endfor %}
 
 
