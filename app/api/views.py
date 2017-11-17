@@ -15,6 +15,13 @@ from flask_login import login_required
 from flask_login.utils import current_user
 from ..decorators import admin_required, permission_required
 from check_mobile import checkMobile
+from todayonhistory import todayonhistory
+
+@api.route('/api/todayonhistory/enevts/<m>/<d>', methods=['GET', 'POST'])
+def querytoday(m, d):
+    history = todayonhistory(m, d)
+    his = history['Events']
+    return render_template('api/todayonhistory.html', his=his)
 
 @api.before_app_request
 def checkmobile():

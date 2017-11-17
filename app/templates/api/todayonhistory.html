@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block page_content %}
+ <div>
+{% for i in his %}
+ <div>
+     {{ i }}
+ </div>
+ {% endfor %}
+
+</div>
+
+
+{% endblock %}
