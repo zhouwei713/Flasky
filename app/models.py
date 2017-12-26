@@ -14,9 +14,7 @@ from datetime import datetime
 import hashlib
 from markdown import markdown
 import bleach
-#from bson.json_util import default
-#from PIL import Image
-#import flask_whooshalchemy as whooshalchemy
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -24,6 +22,7 @@ def load_user(user_id):
 
 class Post(db.Model):
     __tablename__ = 'posts'
+    __searchable__ = ['body','original']
     id = db.Column(db.Integer, primary_key=True)
     postname = db.Column(db.String(128))
     body = db.Column(db.Text)
@@ -32,7 +31,8 @@ class Post(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     readtimes = db.Column(db.Integer, default=1)
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
-    __searchable__ = ['body']
+    picture = db.Column(db.Text)
+    original = db.Column(db.Text)
     
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):

@@ -1,0 +1,20 @@
+{% extends 'new/base.html' %}
+{% import "./_macros.html" as macros %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Kung Fu World - Edit Post{% endblock %}
+{% block cover %}{% endblock %}
+{% block content %}
+<div class="comment-wrap" id="comments">
+<br>
+<h3>Edit Post</h3>
+<div>
+{{ wtf.quick_form(form) }}
+</div>
+<div><a href="{{ url_for('main.newone_post', id=post.id)}}">Cancel</a></div>
+<div><a href="{{ url_for('.edit_delete_post', id=post.id)}}">Delete</a></div>
+</div>
+{% endblock %}
+
+{% block pagination %}
+<div class="pagination-wrap clearfix" role="navigation"></div>
+{% endblock %}

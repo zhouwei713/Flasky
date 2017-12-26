@@ -4,9 +4,9 @@ Created on 20171029
 @author: zhou
 '''
 
-from .forms import QueryIPForm
+from .forms import QueryIPForm, TalkForm
 from flask import render_template, session, redirect, url_for, current_app,flash, abort,request, make_response, g
-from flask import Response
+from flask import Response, jsonify
 from . import api
 from queryIP import queryip
 from query_lat_long import query_lat_long
@@ -16,12 +16,47 @@ from flask_login.utils import current_user
 from ..decorators import admin_required, permission_required
 from check_mobile import checkMobile
 from todayonhistory import todayonhistory
+from talk_robot import talkrobot
+import time, json
+#from pymongo import MongoClient
+from mongo_conn import Mongo_Conn
 
 @api.route('/api/todayonhistory/enevts/<m>/<d>', methods=['GET', 'POST'])
 def querytoday(m, d):
     history = todayonhistory(m, d)
     his = history['Events']
     return render_template('api/todayonhistory.html', his=his)
+
+@api.route('/api/talk-robot/<info>/<roomid>', methods=['GET', 'POST'])
+def talk(info,roomid):
+    db = Mongo_Conn()
+    t = time.strftime("%Y-%m-%d %X", time.localtime())
+    content = talkrobot(info)
+    rooms = db[roomid]
+    rooms.insert({"robotsay":content,"yousay":info, "time":t})
+    cc = {"robotsay":content,"yousay":info, "time":t}
+    return content
+    #return json.dumps(cc)
+    # return jsonify(
+    #     {'text': 'haha'}
+    # )
+    #return render_template('api/talk_robot.html', content=content)
+
+
+@api.route('/api/talkrobot', methods=['GET', 'POST'])
+def talk_robot():
+    db = Mongo_Conn()
+    t = time.strftime("%Y-%m-%d %X", time.localtime())
+    room = "R" + str(t)
+    rooms = db[room]
+    rooms.insert({"robotsay":"","yousay":"","time":t})
+    form = TalkForm()
+    # if form.validate_on_submit():
+    #     info = form.body.data
+    #     content = talkrobot(info)
+    #     return content
+        #return render_template('api/talk.html', form=form, content=content, t=t)
+    return render_template('api/talk.html',form=form, t=t, room=room)
 
 @api.before_app_request
 def checkmobile():

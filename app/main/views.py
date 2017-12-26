@@ -19,20 +19,94 @@ from app.decorators import admin_required
 from ..decorators import admin_required, permission_required
 from jinja2.compiler import UndeclaredNameVisitor
 from app.main.forms import EditProfileAdminForm
+from werkzeug.utils import secure_filename
 from PIL import Image
-import os
+import os,random
 from ..useredis import mark_online, get_online_users, get_user_last_activity
 from ..api.queryIP import queryip
 from ..api.check_mobile import checkMobile
 
+@main.route('/search')
+def search():
+    #result = Post.query.whoosh_search('cool')
+    r = Post.query.msearch('cool',fields=['body'],limit=20).all()
+    return Response(r)
 
+@main.route('/newone')
+def newone():
+    page = request.args.get('page', 1, type=int)
+    query = Post.query
+    pagination = query.order_by(Post.timestamp.desc()).paginate(page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'], error_out=False)
+    posts = pagination.items
+    return render_template('new/index.html',posts=posts, pagination=pagination)
+
+@main.route('/newone/post/<int:id>', methods=['GET', 'POST'])
+def newone_post(id):
+    post = Post.query.get_or_404(id)
+    post.readtimes += 1
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(body=form.body.data, post=post, author=current_user._get_current_object())
+        db.session.add(comment)
+        flash('Your comment has been published.')
+        return redirect(url_for('.newone_post', id=post.id, page=-1))
+    page = request.args.get('page', 1, type=int)
+    if page == -1:
+        page = (post.comments.count() -1) // current_app.config['FLASKY_COMMENTS_PER_PAGE'] + 1
+    pagination = post.comments.order_by(Comment.timestamp.asc()).paginate(
+        page, per_page=current_app.config['FLASKY_COMMENTS_PER_PAGE'], error_out=False
+        )
+    comments = pagination.items
+    return render_template('new/post.html', posts=[post], form=form, comments=comments, pagination=pagination)
+
+@main.route('/newone/post/publish', methods=['GET', 'POST'])
+def newone_publish_blog():
+    return render_template('new/publish_blog.html')
+@main.route('/newone/publish/post', methods=['GET', 'POST'])
+def newone_publish_post():
+    postname = request.form.get('postname','')
+    body = request.form.get('postbody','')
+    original = request.form.get('original','')
+    if postname is not None and body is not None and current_user.can(Permission.WRITE_ARTICLES):
+        post = Post(body=body, postname=postname, author=current_user._get_current_object(), original=original)
+        db.session.add(post)
+        return redirect(url_for('.user', username=current_user.username))
+
+@main.route('/newone/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def newone_edit(id):
+    post = Post.query.get_or_404(id)
+    if current_user != post.author and not current_user.can(Permission.ADMINISTER):
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.body = form.body.data
+        post.postname = form.postname.data
+        post.original = form.original.data
+        db.session.add(post)
+        flash('The post has been updated.')
+        return redirect(url_for('.newone_post', id=post.id))
+    form.body.data = post.body
+    form.postname.data = post.postname
+    form.original.data = post.original
+    return render_template('new/edit_post.html', form=form, post=post)
+
+
+@main.route('/new/profile/<username>')
+def new_profile(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        abort(404)
+    page = request.args.get('page',1, type=int)
+    pagination = user.posts.order_by(Post.timestamp.desc()).paginate(page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+                                                                     error_out=False)
+    posts = pagination.items
+    last = user.last_seen.strftime('%Y-%m-%d %H:%M:%S')
+    return render_template('new/profile.html', user=user,posts=posts, pagination=pagination, last=last)
 
 @main.route('/',methods=['GET','POST'])
 def index():
     form = PostForm()
-    # MB = False
-    # if checkMobile(request):
-    #     MB = True
     if form.validate_on_submit() and current_user.can(Permission.WRITE_ARTICLES):
         post = Post(body=form.body.data, postname=form.postname.data, author=current_user._get_current_object())
         db.session.add(post)
@@ -54,10 +128,9 @@ def index():
 def publish_blog():
     form = PostForm()
     if form.validate_on_submit() and current_user.can(Permission.WRITE_ARTICLES):
-        post = Post(body=form.body.data, postname=form.postname.data, author=current_user._get_current_object())
+        post = Post(body=form.body.data, postname=form.postname.data, author=current_user._get_current_object(), original=form.original.data)
         db.session.add(post)
         return redirect(url_for('.user', username=current_user.username))
- 
     return render_template('publish_blog.html', form=form,)
     
 @main.route('/profile')
@@ -146,27 +219,6 @@ def manage_user():
     users = User.query.all()
     return render_template('manage_user.html', users=users)
 
-# @main.before_app_request
-# def mark_current_user_online():
-#     mark_online(request.remote_addr)
-#
-# @main.route('/admin/online-user')
-# @login_required
-# @admin_required
-# def online_user():
-#     Online_user = get_online_users()
-#     for i in Online_user:
-#         location = queryip(i)
-#         city = location.get('city','kenya')
-#         #return render_template('online_user.html', Online_user=Online_user, city=city)
-    #location = queryip()
-    #Online_user = ','.join(get_online_users())
-    #a = type(Online_user)
-    #raise Exception('test')
-    #return render_template('online_user.html', Online_user=Online_user, city=city)
-    #return Response('Online User: %s' % ','.join(get_online_users()), mimetype='text/plain')
-
-
 @main.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
     post = Post.query.get_or_404(id)
@@ -196,11 +248,13 @@ def edit(id):
     if form.validate_on_submit():
         post.body = form.body.data
         post.postname = form.postname.data
+        post.original = form.original.data
         db.session.add(post)
         flash('The post has been updated.')
         return redirect(url_for('.post', id=post.id))
     form.body.data = post.body
     form.postname.data = post.postname
+    form.original.data = post.original
     return render_template('edit_post.html', form=form, post=post)
 
 @main.route('/edit/post/delete/<int:id>')

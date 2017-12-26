@@ -9,7 +9,13 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='background-dragonv2.jpg')}}" tyep="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='background-dragonv2.jpg')}}" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/css_chat.css') }}" />
 
+{#    <!-- for new login-->#}
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='login/css/style.css') }}">#}
+{#<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">#}
+{#<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>#}
 {% endblock %}
 
 {% block navbar %}
@@ -51,6 +57,7 @@
         {% if current_user.is_administrator() %}
         <li><a href="{{ url_for('main.manage_user') }}">Manage User</a></li>
         <li><a href="{{ url_for('api.online_user') }}">Online User</a></li>
+        <li><a href="{{ url_for('api.talk_robot') }}">Talk With Robot</a></li>
         {% endif %}
         <li><a href="{{ url_for('main.profile') }}">Setting</a></li>
         {% if current_user.can(Permission.MODERATE_COMMENTS) %}
@@ -76,7 +83,8 @@
 body {
      padding-bottom: 100px;
      background-color: #ffffff;
-     background-image: url('{{ url_for('static',filename='background-dragonv2.jpg') }}');
+{#     background-image: url('{{ url_for('static',filename='background-dragonv2.jpg') }}');#}
+     background-image: url('{{ url_for('static',filename='jiangshan.jpg') }}');
      background-repeat: no-repeat;
      background-attachment: fixed;
      background-size:100% 100%;
@@ -126,7 +134,8 @@ body {
     //跳转语句
     if(system.win||system.mac||system.xll){//转向后台登陆页面
         //window.location.href="http://www.baidu.com";
-        document.body.style.backgroundImage="url(/static/background-dragonv2.jpg)";
+{#        document.body.style.backgroundImage="url(/static/background-dragonv2.jpg)";#}
+        document.body.style.backgroundImage="url(/static/jiangshan.jpg)";
     }else {
         //window.location.href = "http://t.qq.com";
         document.body.style.backgroundImage="url()";

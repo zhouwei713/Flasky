@@ -53,12 +53,14 @@ class EditProfileAdminForm(Form):
             raise ValidationError('User already in use.')
         
 class PostForm(Form):
-    postname = StringField("Post Name", validators=[Required()])
-    body = PageDownField("What's on yur mind?", validators=[Required()])
+    postname = StringField("Post Name", validators=[DataRequired()])
+    body = PageDownField("Post Content", validators=[DataRequired()])
+    #picture = FileField("Upload Your Picture")
+    original = StringField("Original Author")
     submit = SubmitField('Submit')
     
 class CommentForm(Form):
-    body = StringField('', validators=[Required()])
+    body = TextAreaField('',validators=[DataRequired()])
     submit = SubmitField('Submit')
     
 class SearchForm(Form):

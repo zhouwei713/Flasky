@@ -3,10 +3,22 @@
 
 
 {% block page_content %}
+
  <div>
 {% for i in his %}
  <div>
-     {{ i }}
+ <h3>YEAR: {{ i['year'] }}</h3>
+ <h4>{{ i['text'] }}</h4>
+ <h4>
+     <h4>KEY WORD</h4>
+     {% for j in i['links'] %}
+      <div>
+      <h5>
+          <a href="{{ j['link'] }}">{{ j['title'] }}</a>
+      </h5>
+      </div>
+     {% endfor %}
+ </h4>
  </div>
  {% endfor %}
 

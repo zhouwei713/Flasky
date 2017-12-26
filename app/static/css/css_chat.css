@@ -1,0 +1,351 @@
+/* CSS Document */
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 11px;
+	background: #FFFFFF;
+	overflow: scroll;
+}
+
+/* RequestForm shared styles */
+
+.RequestForm {
+	padding: 10px 0;
+}
+
+.RequestForm p.send {
+	margin: 10px 0 5px 0;
+}
+
+.RequestForm .error {
+	border: 1px solid red;
+}
+
+.RequestForm INPUT,.RequestForm SELECT,.RequestForm TEXTAREA {
+	height: 30px;
+	padding: 0 5px;
+	margin: 0;
+	box-sizing: border-box;
+	border: 1px #acc0c9 solid;
+	font-size: 14px;
+	border-radius: 4px;
+}
+
+.RequestForm SELECT {
+	padding: 0 5px;
+}
+
+.RequestForm TEXTAREA {
+	padding: 5px;
+	height: 50px;
+}
+
+.RequestForm TEXTAREA,.RequestForm INPUT[type=text],.RequestForm INPUT[type=email],.RequestForm SELECT
+	{
+	width: 100%;
+}
+
+.RequestForm INPUT[type=checkbox],.RequestForm INPUT[type=radio] {
+	width: auto;
+	height: auto;
+}
+
+.RequestForm INPUT[type=submit],.RequestForm INPUT[type=button] {
+	border: none;
+	padding: 0 20px;
+	background-color: #3FB2DE;
+	font-size: 18px;
+	color: #ffffff;
+	border-radius: 6px;
+	cursor: pointer;
+	height: 40px;
+}
+
+.RequestForm .hidden {
+	visibility: collapse;
+}
+
+/* RequestFormMini styles */
+
+.RequestFormMini {
+	width: 439px;
+}
+
+.RequestFormMini INPUT[type=text],.RequestFormMini INPUT[type=email],.RequestFormMini TEXTAREA,.RequestForm SELECT
+	{
+	width: 340px;
+}
+
+.RequestFormMini td {
+	padding: 5px 0;
+	font-size: 12px;
+}
+
+.RequestFormMini .caption {
+	padding-right: 5px;
+}
+
+/* Misc styles */
+
+.text-center {
+	text-align: center;
+}
+
+.clear {
+	clear: both;
+}
+
+.archor {
+	clear: both;
+	height: 1px;
+}
+
+#mainContainer {
+	width: 719px;
+	border-collapse: collapse;
+}
+
+#leftContainer {
+	vertical-align: top;
+	padding: 0px;
+	width: 202px;
+}
+
+#rightContainer {
+	vertical-align: top;
+	padding: 0px;
+	width: 517px;
+}
+
+#logoContainer {
+	width: 202px;
+	height: 189px;
+	background: #6aafce;
+}
+
+#logoContainerT {
+	width: 202px;
+	padding-top: 17px;
+	height: 172px;
+	background: url('../images/logoT.png') top left no-repeat;
+}
+
+#logoContainerT>img{
+	margin: 0 auto;
+	display: block;
+}
+
+#logoContainerT p {
+	padding: 0;
+	margin: 0;
+	width: 158px;
+	padding-top: 15px;
+	font-size: 11px;
+	line-height: 18px;
+}
+
+#Shadow {
+	vertical-align: top;
+	padding-left: 2px;
+	background: url('../images/shadow.png') top left no-repeat;
+}
+
+#headerContainer {
+	float: left;
+	width: 517px;
+	height: 35px;
+	background: #76a4b8;
+}
+
+#headerContainerT {
+	width: 512px;
+	height: 30px;
+	padding-top: 5px;
+	padding-right: 5px;
+	background: url('../images/headerT.png') top left no-repeat;
+}
+
+#headerContainerT ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+#headerContainerT ul li {
+	float: left;
+}
+
+#headerContainerT ul li a {
+	padding: 0;
+	margin: 0;
+	color: #FFFFFF;
+	font-size: 11px;
+	line-height: 21px;
+	text-decoration: none;
+}
+
+#headerContainer1 {
+	float: left;
+	width: 517px;
+	height: 35px;
+}
+
+#headerContainerT1 {
+	width: 512px;
+	height: 30px;
+	padding-top: 5px;
+	padding-right: 5px;
+}
+
+#headerContainerT1 ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+#headerContainerT1 ul li {
+	float: left;
+}
+
+#headerContainerT1 ul li a {
+	padding: 0;
+	margin: 0;
+	color: #000;
+	font-size: 11px;
+	line-height: 21px;
+}
+
+#headerContainerT2 {
+	padding-top: 5px;
+	padding-right: 5px;
+}
+#headerContainerT2 li {
+	display: inline;
+}
+#headerContainerT2 li a {
+	margin: 0;
+	color: #000;
+	font-size: 11px;
+	line-height: 21px;
+}
+#headerContainerT2 li a img {
+	vertical-align: middle;
+}
+
+#TextContainer {
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+#TextContainer p {
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	padding-bottom: 10px;
+}
+
+#ChatContainer {
+	padding: 5px;
+	margin: 0;
+	box-sizing: border-box;
+	border: 1px #acc0c9 solid;
+	font-size: 14px;
+	border-radius: 4px;
+	height: 295px;
+}
+
+#messages {
+	overflow: auto;
+	height: 100%;
+	background: #fff;
+	font-size: 12px;
+}
+
+#messages * {
+	font-size: 12px !important;
+}
+
+#messages a {
+	color: #0174A4 !important;
+}
+
+#messages table {
+	margin: 5px 0 0 0;
+}
+
+#notify {
+	padding-top: 10px;
+	font-size: 11px;
+	color: #777;
+	font-weight: bold;
+}
+
+.chatRateTweet {
+	margin-right: 10px;
+	width: 28px;
+	vertical-align: middle;
+}
+
+div#TypingForm {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+div#TypingForm textarea {
+	padding: 5px;
+	margin: 0;
+	box-sizing: border-box;
+	border: 1px #acc0c9 solid;
+	font-size: 14px;
+	border-radius: 4px;
+	width: 340px;
+	height: 70px;
+}
+
+div#TypingForm input#Submit {
+	font-size: 18px;
+	border: none;
+	padding: 0 20px;
+	background-color: #3FB2DE;
+	font-size: 18px;
+	color: #ffffff;
+	border-radius: 6px;
+	cursor: pointer;
+	width: 133px;
+	height: 71px;
+}
+
+#EmailTranscript {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	font-size: 12px;
+}
+
+#EmailTranscript li {
+	float: left;
+	padding-right: 5px;
+}
+
+#Rate {
+	clear: both;
+	padding-top: 10px;
+	font-size: 12px;
+}
+
+#rate_text {
+	padding-left: 5px; color : #FF7777;
+	font-size: 12px;
+	font-style: italic;
+	color: #FF7777;
+}
+
+#ratingThanks {
+	color: #c33;
+	font-style: italic;
+	font-size: 12px;
+	text-align: center;
+	padding-top: 10px;
+	font-weight: bold;
+}

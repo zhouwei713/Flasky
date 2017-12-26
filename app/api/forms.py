@@ -17,3 +17,7 @@ class QueryIPForm(Form):
                                                       Regexp('^((?:(2[0-4]\d)|(25[0-5])|([01]?\d\d?))\.){3}(?:(2[0-4]\d)|(255[0-5])|([01]?\d\d?))$',0,"Invalid IP")])
     submit = SubmitField('Query It')
     #submit2 = SubmitField('Check IP Detail')
+
+class TalkForm(Form):
+    body = StringField('', validators=[DataRequired()])
+    submit = SubmitField('Submit')

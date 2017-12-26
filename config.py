@@ -20,6 +20,7 @@ class Config:
     FLASKY_COMMENTS_PER_PAGE = 5
     MAX_SEARCH_RESULTS = 50
     ONLINE_LAST_MINUTES = 5
+    UPLOAD_POST_FOLDER = os.getcwd() + '\\app\\static\\post\\'
     
     @staticmethod
     def init_app(app):
