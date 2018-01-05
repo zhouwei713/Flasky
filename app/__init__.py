@@ -11,6 +11,7 @@ from flask_mail import Mail,Message
 from config import config
 from flask_login import LoginManager
 from flask_pagedown import PageDown
+from flask_msearch import Search
 
 bootstrap = Bootstrap()
 moment = Moment()
@@ -18,6 +19,7 @@ moment = Moment()
 #manager = Manager(app)
 #manager.add_command("runserver", Server(use_debugger=True))
 db = SQLAlchemy()
+search = Search(db=db)
 #migrate = Migrate(app, db)
 #manager.add_command('db', MigrateCommand)
 mail = Mail()
@@ -38,6 +40,7 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
     pagedown.init_app(app)
+    search.init_app(app)
 
 
     

@@ -1,13 +1,21 @@
 {% extends 'bootstrap/base.html' %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% block title %}Flasky{%endblock %}
+{% block title %}Kung Fu World{%endblock %}
 
 {% block head %}
 {{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico')}}" tyep="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico')}}" type="image/x-icon">
+<!--<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico')}}" tyep="image/x-icon">-->
+<!--<link rel="icon" href="{{ url_for('static', filename='favicon.ico')}}" type="image/x-icon">-->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='background-dragonv2.jpg')}}" tyep="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='background-dragonv2.jpg')}}" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/css_chat.css') }}" />
 
+{#    <!-- for new login-->#}
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='login/css/style.css') }}">#}
+{#<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">#}
+{#<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>#}
 {% endblock %}
 
 {% block navbar %}
@@ -21,7 +29,7 @@
         <span class="icon-bar">2</span>
         <span class="icon-bar">3</span>
       </button>
-      <a class="navbar-brand" href="/">Flasky</a>
+      <a class="navbar-brand" href="/">Kung Fu World</a>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -48,7 +56,8 @@
         <li><a href="{{ url_for('main.user', username=current_user.username) }}">Profile</a></li>
         {% if current_user.is_administrator() %}
         <li><a href="{{ url_for('main.manage_user') }}">Manage User</a></li>
-        <li><a href="{{ url_for('main.online_user') }}">Online User</a></li>
+        <li><a href="{{ url_for('api.online_user') }}">Online User</a></li>
+        <li><a href="{{ url_for('api.talk_robot') }}">Talk With Robot</a></li>
         {% endif %}
         <li><a href="{{ url_for('main.profile') }}">Setting</a></li>
         {% if current_user.can(Permission.MODERATE_COMMENTS) %}
@@ -72,9 +81,10 @@
 <br>
 <style>
 body {
-     padding-bottom: 100px; 
+     padding-bottom: 100px;
      background-color: #ffffff;
-     background-image: url('{{ url_for('static',filename='xifu.jpg') }}');
+{#     background-image: url('{{ url_for('static',filename='background-dragonv2.jpg') }}');#}
+     background-image: url('{{ url_for('static',filename='jiangshan.jpg') }}');
      background-repeat: no-repeat;
      background-attachment: fixed;
      background-size:100% 100%;
@@ -94,7 +104,7 @@ body {
 </div>
 <div>
       <footer>
-        <p style="padding: 2rem;" class="pull-right"><a href="http://getbootstrap.com/2.3.2/examples/carousel.html#">Back to top</a></p>
+        <p style="padding: 2rem;" class="pull-right"><a href=#>Back to top</a></p>
         <p style="padding: 2rem;">© 2017 zhouluobo Company, Inc. · <a href="https://github.com/zhouwei713#">Privacy</a> · <a href="https://github.com/zhouwei713#">GitHub</a></p>
       </footer>
 </div>
@@ -103,4 +113,32 @@ body {
 {% block scripts %}
 {{ super() }}
 {{ moment.include_moment() }}
+<script type="text/javascript">
+
+    //平台、设备和操作系统
+    var system ={
+        win : false,
+        mac : false,
+        xll : false
+    };
+    //检测平台
+    var p = navigator.platform;
+    //alert(p);
+
+    /**var sUserAgent = navigator.userAgent.toLowerCase();
+    alert(sUserAgent);*/
+
+    system.win = p.indexOf("Win") == 0;
+    system.mac = p.indexOf("Mac") == 0;
+    system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+    //跳转语句
+    if(system.win||system.mac||system.xll){//转向后台登陆页面
+        //window.location.href="http://www.baidu.com";
+{#        document.body.style.backgroundImage="url(/static/background-dragonv2.jpg)";#}
+        document.body.style.backgroundImage="url(/static/jiangshan.jpg)";
+    }else {
+        //window.location.href = "http://t.qq.com";
+        document.body.style.backgroundImage="url()";
+    }
+</script>
 {% endblock %}

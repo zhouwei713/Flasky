@@ -11,8 +11,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
-    FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
-    FLASKY_MAIL_SENDER = 'zwzengyy@gmail.com'
+    FLASKY_MAIL_SUBJECT_PREFIX = '[KungFuWorld]'
+    FLASKY_MAIL_SENDER = 'kungfurealm@gmail.com'
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN') or 'mowuxue1989@163.com'
     FLASKY_POSTS_PER_PAGE = 5
     UPLOAD_FOLDER = os.getcwd() + '\\app\\static\\avatar\\'
@@ -20,6 +20,7 @@ class Config:
     FLASKY_COMMENTS_PER_PAGE = 5
     MAX_SEARCH_RESULTS = 50
     ONLINE_LAST_MINUTES = 5
+    UPLOAD_POST_FOLDER = os.getcwd() + '\\app\\static\\post\\'
     
     @staticmethod
     def init_app(app):
